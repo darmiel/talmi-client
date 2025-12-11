@@ -50,7 +50,7 @@ func WithAuthToken(token string) Option {
 
 type kv struct {
 	key   string
-	value any
+	value interface{}
 }
 
 type urlBuilder struct {
@@ -82,12 +82,12 @@ func (u *urlBuilder) setPaths(paths ...string) *urlBuilder {
 	return u
 }
 
-func (u *urlBuilder) addQueryParam(key string, value any) *urlBuilder {
+func (u *urlBuilder) addQueryParam(key string, value interface{}) *urlBuilder {
 	u.orderedQuery = append(u.orderedQuery, kv{key: key, value: value})
 	return u
 }
 
-func (u *urlBuilder) addQueryParamNotEmpty(key string, value any) *urlBuilder {
+func (u *urlBuilder) addQueryParamNotEmpty(key string, value interface{}) *urlBuilder {
 	switch v := value.(type) {
 	case string:
 		if v != "" {

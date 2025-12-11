@@ -27,7 +27,7 @@ type AuditEntry struct {
 	Error      string `json:"error,omitempty"`
 
 	// Metadata contains artifact details
-	Metadata map[string]any `json:"metadata,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
 }
 
 // Principal represents the authenticated identity of the caller.
@@ -60,7 +60,7 @@ type TokenMetadata struct {
 	IssuedAt time.Time
 
 	// Metadata contains extra metadata (like scope, installation_id for GitHub, ...)
-	Metadata map[string]any
+	Metadata map[string]interface{}
 }
 
 type ErrorResponse struct {
@@ -77,5 +77,5 @@ type TokenArtifact struct {
 	ExpiresAt time.Time `json:"expires_at"`
 
 	// Metadata contains extra information (e.g., "git_user": "x-access-token").
-	Metadata map[string]any `json:"metadata,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
 }

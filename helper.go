@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func (c *Client) get(ctx context.Context, url string, result any) error {
+func (c *Client) get(ctx context.Context, url string, result interface{}) error {
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
 		return fmt.Errorf("creating request: %w", err)
@@ -17,7 +17,7 @@ func (c *Client) get(ctx context.Context, url string, result any) error {
 	return c.do(req, result)
 }
 
-func (c *Client) post(ctx context.Context, url string, payload, result any) error {
+func (c *Client) post(ctx context.Context, url string, payload, result interface{}) error {
 	var body io.Reader
 	if payload != nil {
 		bodyBytes, err := json.Marshal(payload)
@@ -45,7 +45,7 @@ func parseErrorResponse(resp *http.Response) error {
 	return fmt.Errorf("api error: *unparsed '%s' (status %d)", string(body), resp.StatusCode)
 }
 
-func (c *Client) do(req *http.Request, result any) error {
+func (c *Client) do(req *http.Request, result interface{}) error {
 	// inject auth token if available
 	if c.authToken != "" {
 		req.Header.Set("Authorization", "Bearer "+c.authToken)
