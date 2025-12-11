@@ -1,2 +1,3 @@
 # talmi-client
-Go SDK for Talmi STS
+
+Public Mirror of Go SDK for Talmi STS
